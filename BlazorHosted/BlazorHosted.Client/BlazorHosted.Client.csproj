@@ -20,6 +20,7 @@
     <Folder Include="JavaScriptInterop\" />
     <Folder Include="Proxy\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
 </Project>
