@@ -1,0 +1,38 @@
+﻿
+
+@inherits PersonDetailViewModel
+
+<div class="container">
+    <div class="row">
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@Person.Picture" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@Person.Name</h5>
+                <p class="card-text">@($"{Person.Email} {Person.PhoneNumber}")</p>
+                <button class="btn btn-success" onclick="@SelectPerson">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@functions {
+
+    //[Parameter]
+    //Persons Parent { get; set; }
+
+
+    //[Parameter]
+    //User Person { get; set;}
+
+    //[Parameter]
+    //public Action<User> PersonSelected { get; set; }
+
+    //void SelectPerson()
+    //{
+    //    Console.WriteLine("Handler called");
+    //    PersonSelected?.Invoke(Person);
+    //}
+
+}
