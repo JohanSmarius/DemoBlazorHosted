@@ -1,16 +1,16 @@
 ﻿using System;
 using BlazorHosted.Shared;
-using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorHosted.Client.Shared
 {
-    public class PersonDetailViewModel : BlazorComponent
+    public class PersonDetailViewModel : ComponentBase
     {
         [Parameter]
         protected User Person { get; set; }
 
         [Parameter]
-        public Action<User> PersonSelected { get; set; }
+        internal Action<User> PersonSelected { get; set; }
 
         protected void SelectPerson()
         {

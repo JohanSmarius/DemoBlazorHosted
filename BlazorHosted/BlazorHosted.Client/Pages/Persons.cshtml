@@ -2,7 +2,7 @@
 @using BlazorHosted.Client.JavaScriptInterop
 @using BlazorHosted.Client.Services
 @using BlazorHosted.Shared
-@using Microsoft.AspNetCore.Blazor.Services
+@using Microsoft.AspNetCore.Components.Services
 
 @inject IDomainService PersonService
 @inject HttpClient Http
@@ -46,7 +46,6 @@
 
 
 <button class="btn btn-primary" onclick="@LoadPersons">Load persons From server</button>
-<button class="btn btn-primary" onclick="@LoadLocalPersons">Load local persons</button>
 <button class="btn btn-primary" onclick="@DeleteLastPerson">Delete last persons</button>
 
 
@@ -55,54 +54,17 @@
     string WelcomeMessage = "Welcome DotNED Saturday From Blazor!";
 
     User CurrentUser { get; set; }
-    //{
-    //    Name = "Scott Hanselman",
-    //    Email = "scott@microsoft.com",
-    //    PhoneNumber = "12345468",
-    //    Picture = "https://avatars0.githubusercontent.com/u/2892?s=460&v=4"
-    //};
 
     List<User> AvailablePersons = new List<User>();
 
     async Task LoadPersons()
     {
         await PersonService.LoadPersons();
-        AvailablePersons.AddRange(PersonService.AvailablePersons);
+        AvailablePersons = PersonService.AvailablePersons;
     }
-
-    //PersonDetail PersonComponent;
-
-    //protected override void OnAfterRender()
-    //{
-    //    PersonComponent.PersonSelected += (User person) =>
-    //    {
-    //        Console.WriteLine("Caught event");
-    //        CurrentUser = person;
-    //        StateHasChanged();
-    //    };
-    //}
 
     protected override async Task OnInitAsync()
     {
-        //AvailablePersons.Add(new User()
-        //{
-        //    Name = "Scott Hanselman",
-        //    Email = "scott@microsoft.com",
-        //    PhoneNumber = "12345468",
-        //    Picture = "https://avatars0.githubusercontent.com/u/2892?s=460&v=4"
-        //});
-
-        //AvailablePersons.Add(new User()
-        //{
-        //    Name = "Scott Guthrie",
-        //    Email = "scott@microsoft.com",
-        //    PhoneNumber = "12345468",
-        //    Picture = "https://sec.ch9.ms/ch9/e6c4/ea6aa4d2-472a-46c1-a31e-b3d86daee6c4/scottguazurewebsitesendpoints_960.jpg?v=744001bc6a23bbf8533bfb48dc1e9372cfe8dbe985ae55b3f5e950865fce9395"
-        //});
-
-
-        await PersonService.LoadSavedList();
-
         AvailablePersons = PersonService.AvailablePersons;
     }
 
@@ -115,12 +77,6 @@
             await PersonService.DeleteLastPerson();
             AvailablePersons = PersonService.AvailablePersons;
         }
-    }
-
-    async Task LoadLocalPersons()
-    {
-        await PersonService.LoadSavedList();
-        AvailablePersons = PersonService.AvailablePersons;
     }
 
     void OnSelectPerson(User person)
