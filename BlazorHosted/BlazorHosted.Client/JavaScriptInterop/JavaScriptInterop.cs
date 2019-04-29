@@ -3,11 +3,18 @@ using Microsoft.JSInterop;
 
 namespace BlazorHosted.Client.JavaScriptInterop
 {
-    public static class JavaScriptInterop
+    public class JavaScriptInterop : IJavaScriptInterop
     {
-        public static Task<bool> Confirm(string message)
+        private readonly IJSRuntime _jsRuntime;
+
+        public JavaScriptInterop(IJSRuntime jsRuntime)
         {
-            return JSRuntime.Current.InvokeAsync<bool>("helperfunction.confirm", message);
+            _jsRuntime = jsRuntime ?? throw new System.ArgumentNullException(nameof(jsRuntime));
+        }
+
+        public  Task<bool> Confirm(string message)
+        {
+            return _jsRuntime.InvokeAsync<bool>("helperfunction.confirm", message);
         }
     }
 }

@@ -2,10 +2,14 @@
 @using BlazorHosted.Client.JavaScriptInterop
 @using BlazorHosted.Client.Services
 @using BlazorHosted.Shared
-@using Microsoft.AspNetCore.Components.Services
+@using Microsoft.AspNetCore.Components
+
 
 @inject IDomainService PersonService
+@inject IJavaScriptInterop JavaScriptInterop
+
 @inject HttpClient Http
+
 @inject IUriHelper UrlHelper
 
 <NavLink class="nav-link" href="/">To Home</NavLink>
@@ -65,7 +69,7 @@
 
     protected override async Task OnInitAsync()
     {
-        AvailablePersons = PersonService.AvailablePersons;
+        AvailablePersons = await Http.GetJsonAsync<List<User>>("api/persons");
     }
 
     async Task DeleteLastPerson()
